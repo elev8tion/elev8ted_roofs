@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api.v1.endpoints import address, measurement, ai
+from app.api.v1.endpoints import address, measurement, ai, satellite, roof_detection, autocomplete
 
 
 # Create FastAPI app
@@ -25,8 +25,11 @@ app.add_middleware(
 
 # Include routers
 app.include_router(address.router, prefix="/api/v1/address", tags=["Address"])
+app.include_router(autocomplete.router, prefix="/api/v1/autocomplete", tags=["Autocomplete"])
 app.include_router(measurement.router, prefix="/api/v1/measurement", tags=["Measurement"])
 app.include_router(ai.router, prefix="/api/v1/ai", tags=["AI"])
+app.include_router(satellite.router, prefix="/api/v1/satellite", tags=["Satellite"])
+app.include_router(roof_detection.router, prefix="/api/v1/roof", tags=["Roof Detection"])
 
 
 @app.get("/")
